@@ -33,7 +33,9 @@ const toggle = () => {
             }
           ]"
         >
-          {{ rubric.title }}
+          <a :href="`https://www.klerk.ru${rubric.url}`" target="_blank" class="recursive__link">
+            {{ rubric.title }}
+          </a>
         </h2>
       </div>
       <ul
@@ -87,6 +89,11 @@ const toggle = () => {
     &--empty-root {
       padding-left: 21px;
     }
+  }
+
+  &__link {
+    color: var(--text-primary);
+    text-decoration: none;
   }
 }
 </style>
