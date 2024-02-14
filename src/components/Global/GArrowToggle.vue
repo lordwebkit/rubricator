@@ -1,7 +1,7 @@
 <script setup>
 import IDownArrow from '@/assets/icon/IDownArrow.vue'
 
-const props = defineProps(['open', 'size'])
+const props = defineProps(['isChecked', 'size'])
 const emit = defineEmits(['toggle'])
 
 const toggle = () => {
@@ -9,7 +9,7 @@ const toggle = () => {
 }
 </script>
 <template>
-  <button class="arrow-toggle" :class="{ 'arrow-toggle--close': !props.open }" @click="toggle">
+  <button class="arrow-toggle" :class="{ 'arrow-toggle--close': !props.isChecked }" @click="toggle">
     <IDownArrow :size="props.size ?? 16" />
   </button>
 </template>

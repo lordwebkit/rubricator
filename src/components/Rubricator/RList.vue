@@ -2,13 +2,13 @@
 import { useRubricatorStore } from '@/stores/rubricator'
 import RRecursiveList from '@/components/Rubricator/RRecursiveList.vue'
 
-const rubricator = useRubricatorStore()
+const store = useRubricatorStore()
 
-rubricator.fetchRubric()
+store.fetchRubric()
 </script>
 <template>
   <ul class="rubric">
-    <li class="rubric__item" v-for="rubric in rubricator.rubric">
+    <li class="rubric__item" v-for="rubric in store.rubric">
       <RRecursiveList :rubric="rubric" :level="1" />
     </li>
   </ul>

@@ -6,16 +6,23 @@ const rubricUrl = 'https://www.klerk.ru/yindex.php/v3/event/rubrics/'
 
 export const useRubricatorStore = defineStore('rubricator', () => {
   const rubric = ref()
+  const isRubricLoad = ref(false)
+  const isRubricWithEmptyRubric = ref(1)
 
   async function fetchRubric() {
+    const requestOptions = {
+      params: { allowEmpty: isRubricWithEmptyRubric.value }
+    }
+
     try {
-      const response = await axios.get(rubricUrl, { params: { allowEmpty: 1 } })
-      // const response = await axios.get(rubricUrl)
+      isRubricLoad.value = true
+      const response = await axios.get(rubricUrl, requestOptions)
+      isRubricLoad.value = false
       rubric.value = response.data
     } catch (e) {
       console.error(e)
     }
   }
 
-  return { rubric, fetchRubric }
+  return { rubric, isRubricLoad, isRubricWithEmptyRubric, fetchRubric }
 })

@@ -15,7 +15,7 @@ const toggle = () => {
     <div class="recursive__inner">
       <div class="recursive__content">
         <GArrowToggle
-          :open="recursiveThree"
+          :is-checked="recursiveThree"
           @toggle="toggle"
           v-show="rubric.children && rubric.children.length"
         />
