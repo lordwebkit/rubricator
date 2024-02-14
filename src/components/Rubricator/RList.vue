@@ -15,6 +15,8 @@ rubricator.fetchRubric()
 </template>
 <style lang="scss" scoped>
 .rubric {
-  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>
