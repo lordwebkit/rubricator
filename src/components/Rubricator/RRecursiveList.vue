@@ -1,8 +1,10 @@
 <script setup>
 import { computed, ref } from 'vue'
 import GArrowToggle from '../Global/GArrowToggle.vue'
+import { useRubricatorStore } from '@/stores/rubricator'
 
 const props = defineProps(['rubric', 'level'])
+const store = useRubricatorStore()
 
 const recursiveThree = ref(true)
 
@@ -49,6 +51,20 @@ const calculateRecursiveCount = (rubric) => {
             <a :href="`https://www.klerk.ru${rubric.url}`" target="_blank" class="recursive__link">
               {{ rubric.title }}
             </a>
+            <input
+              type="checkbox"
+              @change="
+                (e) => {
+                  if (e.target.checked) {
+                    store.rubricCheckedItems = [...store.rubricCheckedItems, rubric.id]
+                  } else {
+                    store.rubricCheckedItems = store.rubricCheckedItems.filter((id) => {
+                      return id !== rubric.id
+                    })
+                  }
+                }
+              "
+            />
           </h2>
         </div>
         <p class="recursive__count recursive-count">
@@ -103,6 +119,9 @@ const calculateRecursiveCount = (rubric) => {
 
   &__title {
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 
     &--root {
       font-weight: 500;
@@ -124,6 +143,7 @@ const calculateRecursiveCount = (rubric) => {
 
   &__count {
     font-size: 14px;
+    display: flex;
   }
 }
 </style>

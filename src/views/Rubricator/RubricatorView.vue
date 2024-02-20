@@ -59,6 +59,7 @@ const handleToggleSwitchEmptyRubric = () => {
           </div>
         </div>
       </div>
+      <div class="rubricator__checked">Выбранных статей: {{ store.rubricCheckedCount }}</div>
       <div class="rubricator__list" v-show="rubricatorTrees">
         <RList />
       </div>
@@ -77,6 +78,11 @@ const handleToggleSwitchEmptyRubric = () => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &__checked {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
   }
 
   &__list {
