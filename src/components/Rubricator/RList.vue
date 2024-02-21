@@ -8,7 +8,7 @@ store.fetchRubric()
 </script>
 <template>
   <ul class="rubric">
-    <li class="rubric__item" v-for="rubric in store.rubric">
+    <li class="rubric__item" v-for="rubric in store.rubric" :key="rubric">
       <RRecursiveList :rubric="rubric" :level="1" />
     </li>
   </ul>

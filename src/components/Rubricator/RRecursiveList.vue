@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import GArrowToggle from '../Global/GArrowToggle.vue'
 import { useRubricatorStore } from '@/stores/rubricator'
 
@@ -34,6 +34,21 @@ const calculateRecursiveCount = (rubric) => {
             @toggle="toggle"
             v-show="rubric.children && rubric.children.length"
           />
+          <input
+            class="recursive__checkbox"
+            type="checkbox"
+            @change="
+              (e) => {
+                if (e.target.checked) {
+                  store.rubricCheckedItems = [...store.rubricCheckedItems, rubric.id]
+                } else {
+                  store.rubricCheckedItems = store.rubricCheckedItems.filter((id) => {
+                    return id !== rubric.id
+                  })
+                }
+              }
+            "
+          />
           <h2
             class="recursive__title"
             :class="[
@@ -51,20 +66,6 @@ const calculateRecursiveCount = (rubric) => {
             <a :href="`https://www.klerk.ru${rubric.url}`" target="_blank" class="recursive__link">
               {{ rubric.title }}
             </a>
-            <input
-              type="checkbox"
-              @change="
-                (e) => {
-                  if (e.target.checked) {
-                    store.rubricCheckedItems = [...store.rubricCheckedItems, rubric.id]
-                  } else {
-                    store.rubricCheckedItems = store.rubricCheckedItems.filter((id) => {
-                      return id !== rubric.id
-                    })
-                  }
-                }
-              "
-            />
           </h2>
         </div>
         <p class="recursive__count recursive-count">
@@ -139,6 +140,10 @@ const calculateRecursiveCount = (rubric) => {
   &__link {
     color: var(--text-primary);
     text-decoration: none;
+  }
+
+  &__checkbox {
+    cursor: pointer;
   }
 
   &__count {
